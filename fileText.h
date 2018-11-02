@@ -12,13 +12,16 @@ using namespace std;
 
 class fileText
 {
-	fstream inFile;
+protected:
+    fstream inFile;
     vector<string> fileName;
-	vector<string> lines;
+    vector<string> lines;
 
-	public:
+    void fileCheck(); // check if file exists
+
+public:
     fileText(){}; // default
-    inline fileText(const string &name){copyFile(name);}; // construct with name of file
+    fileText(const string &name){copyFile(name);}; // construct with name of file
 
     // copy file to lines vector
     void copyFile(const string &name);
@@ -38,6 +41,17 @@ class fileText
     int getLineCount(){return lines.size();};
 };
 
+// check if file exists
+void fileText::fileCheck()
+{
+    try{assert(inFile);}
+    catch(exception &e)
+    {
+        cout << fileName.back() << " could not be opened." << endl;
+        return;
+    }
+}
+
 void fileText::copyFile(const string &name)
 {
     string line; // buffer for lines of file
@@ -45,12 +59,7 @@ void fileText::copyFile(const string &name)
 
     inFile.open(fileName.back().c_str());
 
-    try{assert(inFile);}
-    catch(exception &e)
-    {
-        cout << fileName.back() << " could not be opened." << endl;
-        return;
-    }
+    fileCheck();
 
     while(getline(inFile, line))
         lines.push_back(line);
