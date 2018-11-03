@@ -1,0 +1,2 @@
+Here are the contents of include2.txt.
+Here is the last line of include2.

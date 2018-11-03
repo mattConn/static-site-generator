@@ -44,8 +44,13 @@ public:
 // check if file exists
 void fileText::fileCheck()
 {
-    try{assert(inFile);}
-    catch(exception &e)
+//    try{assert(inFile);}
+//    catch(exception &e)
+//    {
+//        cout << fileName.back() << " could not be opened." << endl;
+//        return;
+//    }
+    if(!inFile)
     {
         cout << fileName.back() << " could not be opened." << endl;
         return;
