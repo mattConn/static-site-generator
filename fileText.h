@@ -17,7 +17,7 @@ protected:
     vector<string> fileName;
     vector<string> lines;
 
-    void fileCheck(); // check if file exists
+    void fileExists(); // check if file exists
 
 public:
     fileText(){}; // default
@@ -42,7 +42,7 @@ public:
 };
 
 // check if file exists
-void fileText::fileCheck()
+void fileText::fileExists()
 {
 //    try{assert(inFile);}
 //    catch(exception &e)
@@ -64,7 +64,7 @@ void fileText::copyFile(const string &name)
 
     inFile.open(fileName.back().c_str());
 
-    fileCheck();
+    fileExists();
 
     while(getline(inFile, line))
         lines.push_back(line);

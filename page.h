@@ -2,7 +2,7 @@
 
 class page : public fileText
 {
-    fstream *inFile = new fstream;
+    fstream inFile;
 
     // directive definitions
     char delimeter = '#';
@@ -12,6 +12,8 @@ class page : public fileText
     // i.e. dirLabel[dirFoundIndex];
     vector<int> dirFoundIndex;
 
+    // tokenize string helper method
+    void tokenizeStr(const string &str, vector<string> &tokens);
 
 public:
     page(){dirLabel.push_back("include");}; //default
@@ -37,17 +39,20 @@ public:
     string getdirLabel(){return dirLabel.back();} // get last dirLabel
     string getdirLabel(const int &index){return dirLabel[index];} // get directive label by index
     int getdirLabelLength(){return dirLabel.size();}; // num of dirLabels used
+
+    // append lines from another page obj.
+    void appendLines(page &p);
 };
 
 void page::copyFile(const string &name)
 {
     string line; // buffer for lines of file
     fileName.push_back(name);
-    inFile->open(fileName.back().c_str());
-    fileCheck();
+    inFile.open(fileName.back().c_str());
+    fileExists();
 
     // parse file lines
-    while(getline(*inFile, line))
+    while(getline(inFile, line))
     {
         // check for directive
         // ===================
@@ -68,41 +73,19 @@ void page::copyFile(const string &name)
                 if(dirLabel[i] == possibleDirLabel)
                 {
                     // tokenize string: get found directive and following instructions
-                    // =========================================================
-                    vector<string> lineTokens; // hold directive and following instruction(s)
-
-                    int beg, end; // beginning and end of substr.
-                    beg = end = 1; // beg. is 1 to ignore delimeter
-
-                    while(end != -1) // until out of range (like string::npos)
-                    {
-                        end = line.find(' ',beg);
-                        lineTokens.push_back(line.substr(beg, end - beg));
-                        beg = end+1;
-                    }
-
-                    // ===================
-                    // end tokenize string
+                    vector<string> lineTokens;
+                    tokenizeStr(line, lineTokens);
 
                     // execute directive instructions
                     // ==============================
                     if(dirLabel[i] == "include")
                     {
-                        /*
-                        fstream infile;
-                        infile.open(lineTokens[1].c_str());
-
-                        string str;
-                        while(getline(infile,str))
-                            lines.push_back(str);
-                        infile.close();
-                        */
-
-                        // TODO
-                        // successful recursion
-                       copyFile(lineTokens[1]);
+                        // copy included file
+                        page p(lineTokens[1]);
+                        appendLines(p);
+                        //                        for(int i = 0; i < p.getLineCount(); i++)
+                        //                            lines.push_back(p.getLine(i));
                     }
-
                     break; // break out of possible directive comparison loop
 
                 } // end directive found in line
@@ -114,5 +97,25 @@ void page::copyFile(const string &name)
 
     }
 
-    inFile->close();
+    inFile.close();
 };
+
+void page::tokenizeStr(const string &str, vector<string> &tokens)
+{
+    int beg, end; // beginning and end of substr.
+    beg = end = 1; // beg. is 1 to ignore delimeter
+
+    while(end != -1) // until out of range (like string::npos)
+    {
+        end = str.find(' ',beg);
+        tokens.push_back(str.substr(beg, end - beg));
+        beg = end+1;
+    }
+}
+
+// append lines from another page obj.
+void page::appendLines(page &p)
+{
+    for(int i = 0; i < p.getLineCount(); i++)
+        lines.push_back(p.getLine(i));
+}

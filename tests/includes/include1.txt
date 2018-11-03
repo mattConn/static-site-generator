@@ -1,2 +1,3 @@
 Here is line 1 of include1...
+#include nested.txt
 and last line of include1.
