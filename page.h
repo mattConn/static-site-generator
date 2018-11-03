@@ -2,6 +2,8 @@
 
 class page : public fileText
 {
+    fstream *inFile = new fstream;
+
     // directive definitions
     char delimeter = '#';
     vector<string> dirLabel; // directive label, i.e. "include"
@@ -41,11 +43,11 @@ void page::copyFile(const string &name)
 {
     string line; // buffer for lines of file
     fileName.push_back(name);
-    inFile.open(fileName.back().c_str());
+    inFile->open(fileName.back().c_str());
     fileCheck();
 
     // parse file lines
-    while(getline(inFile, line))
+    while(getline(*inFile, line))
     {
         // check for directive
         // ===================
@@ -112,5 +114,5 @@ void page::copyFile(const string &name)
 
     }
 
-    inFile.close();
+    inFile->close();
 };
