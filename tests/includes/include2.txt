@@ -1,2 +1,2 @@
-Here are the contents of include2.txt.
-Here is the last line of include2.
+begin include2.txt
+end include2.txt

@@ -1,6 +1,4 @@
-Here is line one.
-And this is line two.
-#include include1.txt
-A line in between includes...
+begin main.txt
+#include "include1.txt"
 #include include2.txt
-And here is the very last line.
+end main.txt

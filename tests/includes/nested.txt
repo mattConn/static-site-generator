@@ -1,2 +1,2 @@
-This file is nested within an include.
-Last line of nested.txt
+begin nested.txt
+end nested.txt

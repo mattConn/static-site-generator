@@ -11,6 +11,9 @@ class page : public fileText
     // tokenize string helper method
     void tokenizeStr(const string &str, vector<string> &tokens);
 
+    // remove quotation marks
+    void stripQuotes(string &str);
+
 public:
     page(){directiveTokens.push_back("include");}; //default
 
@@ -59,14 +62,14 @@ void page::copyFile(const string &name)
         if(line[0] == delimeter) // if starts with delim., may be directive
         {
             // checking string starting at 1 (ignore delimeter)
-            string possibledirectiveTokens = line.substr(1, line.find(' ')-1);
+            string possibleDirectiveTokens = line.substr(1, line.find(' ')-1);
 
             // compare with possible directives in directiveTokens
             for(int i = 0; i < directiveTokens.size(); i++)
             {
                 // if directive found in line
                 // =======================
-                if(directiveTokens[i] == possibledirectiveTokens)
+                if(directiveTokens[i] == possibleDirectiveTokens)
                 {
                     // tokenize string: get found directive and following instructions
                     vector<string> lineTokens;
@@ -74,8 +77,11 @@ void page::copyFile(const string &name)
 
                     // execute directive instructions
                     // ==============================
-                    if(directiveTokens[i] == "include")
+                    if(lineTokens[0] == "include")
                     {
+                        // remove quotation marks if present
+                        stripQuotes(lineTokens[1]);
+
                         // copy included file
                         page p(lineTokens[1]);
                         appendLines(p);
@@ -112,4 +118,14 @@ void page::appendLines(page &p)
 {
     for(int i = 0; i < p.getLineCount(); i++)
         lines.push_back(p.getLine(i));
+}
+
+void page::stripQuotes(string &str)
+{
+    // quotation at front
+    if(str.front() == '"')
+        str.erase(0,1);
+    // quotation at back
+    if(str.back() == '"')
+        str.pop_back();
 }
