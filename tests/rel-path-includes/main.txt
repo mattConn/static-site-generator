@@ -1,0 +1,3 @@
+Line one of test file.
+#include "../includes/include1.txt"
+End test file
