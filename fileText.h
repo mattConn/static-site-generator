@@ -52,7 +52,9 @@ void fileText::fileExists()
 //    }
     if(!inFile)
     {
-        cout << fileName.back() << " could not be opened." << endl;
+        cout << "ERROR: File `" << fileName.back() << "`" << " could not be opened. Exiting." << endl;
+        exit(EXIT_FAILURE);
+
         return;
     }
 }
