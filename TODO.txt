@@ -1,5 +1,8 @@
-file includer
-file scanner
+file includer X
+file scanner X
+argument handler (set delimiter, dist folder)
+directory creation
 directory lister
 markdown parser
-manifest reader
+manifest reader X
+unix chdir to cwd

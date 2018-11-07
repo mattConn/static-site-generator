@@ -16,22 +16,27 @@ int main(int argc, char *argv[])
     fileText manifest(manifestFname);
 
     // storage for pages
-    vector<page> pages;
-    page p("manifest");
-    p.getLine(0);
+    vector<page> pageStorage;
 
-//    pages.push_back(p);
-
-    /*
-    page *p;
     for(int i = 0; i < manifest.getLineCount(); i++)
     {
-        p = new page;
-        p->copyFile(manifest.getLine(i));
 
-        pages.push_back(p);
+        page p(manifest.getLine(i));
+
+        ofstream outFile;
+        outFile.open("dist/"+p.getFileName());
+
+        int j = 0;
+        while(j < p.getLineCount())
+        {
+            outFile << p.getLine(j) << endl;
+            j++;
+        }
+
+        cout << "Wrote to `dist/" << p.getFileName() << "`." << endl;
+
+        outFile.close();
     }
-    */
 
 
 
