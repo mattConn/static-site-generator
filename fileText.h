@@ -2,7 +2,6 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <cassert>
 
 using namespace std;
 
@@ -17,7 +16,7 @@ protected:
     vector<string> fileName;
     vector<string> lines;
 
-    void fileExists(); // check if file exists
+    void fileExists(const fstream &openFile);// check if file exists
 
 public:
     fileText(){}; // default
@@ -42,15 +41,9 @@ public:
 };
 
 // check if file exists
-void fileText::fileExists()
+void fileText::fileExists(const fstream &openFile)
 {
-//    try{assert(inFile);}
-//    catch(exception &e)
-//    {
-//        cout << fileName.back() << " could not be opened." << endl;
-//        return;
-//    }
-    if(!inFile)
+    if(!openFile)
     {
         cout << "ERROR: File `" << fileName.back() << "`" << " could not be opened. Exiting." << endl;
         exit(EXIT_FAILURE);
@@ -66,7 +59,7 @@ void fileText::copyFile(const string &name)
 
     inFile.open(fileName.back().c_str());
 
-    fileExists();
+    fileExists(inFile);
 
     while(getline(inFile, line))
         lines.push_back(line);

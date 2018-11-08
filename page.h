@@ -48,7 +48,7 @@ void page::copyFile(const string &name)
     string line; // buffer for lines of file
     fileName.push_back(name);
     inFile.open(fileName.back().c_str());
-    fileExists();
+    fileExists(inFile);
 
     // parse file lines
     while(getline(inFile, line))
