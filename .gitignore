@@ -36,3 +36,5 @@
 # Project Binaries
 static-site-generator
 tests/*.out
+
+Makefile
