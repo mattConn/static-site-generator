@@ -37,4 +37,5 @@
 static-site-generator
 tests/*.out
 
+#qmake makefile
 Makefile
