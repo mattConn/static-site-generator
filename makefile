@@ -17,5 +17,8 @@ check :
 manifest:
 	cd tests/manifest-test; ../../$(BIN)
 
+#==========
+# end tests
+
 clean :
 	rm -rf bin

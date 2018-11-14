@@ -36,6 +36,7 @@
 # Project Binaries
 static-site-generator
 tests/*.out
+bin/
 
 #qmake makefile
 Makefile
