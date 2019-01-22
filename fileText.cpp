@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <stdexcept>
 #include <string>
 #include <vector>
 #include "fileText.h"
@@ -8,29 +9,31 @@
 // for capturing file text
 //========================
 
-// check if file exists
-void fileText::fileExists(const std::fstream &openFile)
+bool fileText::openFile(const std::string &name)
 {
-    if(!openFile)
-    {
-        std::cout << "ERROR: File `" << fileName.back() << "`" << " could not be opened. Exiting." << std::endl;
-        exit(EXIT_FAILURE);
+	inFile.open(name);
 
-        return;
-    }
+	if(!inFile)
+	{
+		std::cout << "Warning: could not open " << fileName << std::endl;
+		return false;
+	}
+
+	return true;
 }
 
-void fileText::copyFile(const std::string &name)
+// copy file text to lines vector
+bool fileText::copyFile(const std::string &name)
 {
     std::string line; // buffer for lines of file
-    fileName.push_back(name);
+    fileName = name;
 
-    inFile.open(fileName.back().c_str());
+	if(!openFile(fileName)) return false;
 
-    fileExists(inFile);
-
-    while(getline(inFile, line))
-        lines.push_back(line);
+	// store file lines
+    while(getline(inFile, line)) lines.push_back(line);
 
     inFile.close();
+
+	return true;
 }

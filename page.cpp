@@ -3,9 +3,11 @@
 void page::copyFile(const std::string &name)
 {
     std::string line; // buffer for lines of file
-    fileName.push_back(name);
-    inFile.open(fileName.back().c_str());
-    fileExists(inFile);
+    fileName = name;
+    inFile.open(fileName);
+	if(!inFile)
+	{
+	}
 
     // parse file lines
     while(getline(inFile, line))

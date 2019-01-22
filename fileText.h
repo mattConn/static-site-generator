@@ -13,24 +13,20 @@ class fileText
 {
 protected:
     std::fstream inFile;
-    std::vector<std::string> fileName;
+    std::string fileName;
     std::vector<std::string> lines;
-
-    void fileExists(const std::fstream &openFile);// check if file exists
 
 public:
     fileText(){}; // default
     fileText(const std::string &name){copyFile(name);}; // construct with name of file
 
+	bool openFile(const std::string &name);
+
     // copy file to lines std::vector
-    void copyFile(const std::string &name);
+    bool copyFile(const std::string &name);
 
     // fileName methods
-    std::string getFileName(){return fileName.back();};
-    std::string getFileName(const int &nameIndex){return fileName[nameIndex];};
-
-    // get fileName count
-    int getFileNameCount(){return fileName.size();};
+    std::string getFileName(){return fileName;};
 
     // get a line by index or last line
     std::string getLine(){return lines.back();};
