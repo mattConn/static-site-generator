@@ -4,27 +4,25 @@
 #include <vector>
 #include "fileText.h"
 
-using namespace std;
-
 //========================
 // for capturing file text
 //========================
 
 // check if file exists
-void fileText::fileExists(const fstream &openFile)
+void fileText::fileExists(const std::fstream &openFile)
 {
     if(!openFile)
     {
-        cout << "ERROR: File `" << fileName.back() << "`" << " could not be opened. Exiting." << endl;
+        std::cout << "ERROR: File `" << fileName.back() << "`" << " could not be opened. Exiting." << std::endl;
         exit(EXIT_FAILURE);
 
         return;
     }
 }
 
-void fileText::copyFile(const string &name)
+void fileText::copyFile(const std::string &name)
 {
-    string line; // buffer for lines of file
+    std::string line; // buffer for lines of file
     fileName.push_back(name);
 
     inFile.open(fileName.back().c_str());

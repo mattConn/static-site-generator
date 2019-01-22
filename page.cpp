@@ -1,8 +1,8 @@
 #include "page.h"
 
-void page::copyFile(const string &name)
+void page::copyFile(const std::string &name)
 {
-    string line; // buffer for lines of file
+    std::string line; // buffer for lines of file
     fileName.push_back(name);
     inFile.open(fileName.back().c_str());
     fileExists(inFile);
@@ -18,8 +18,8 @@ void page::copyFile(const string &name)
 
         if(line[0] == delimeter) // if starts with delim., may be directive
         {
-            // checking string starting at 1 (ignore delimeter)
-            string possibleDirectiveTokens = line.substr(1, line.find(' ')-1);
+            // checking std::string starting at 1 (ignore delimeter)
+            std::string possibleDirectiveTokens = line.substr(1, line.find(' ')-1);
 
             // compare with possible directives in directiveTokens
             for(int i = 0; i < directiveTokens.size(); i++)
@@ -29,7 +29,7 @@ void page::copyFile(const string &name)
                 if(directiveTokens[i] == possibleDirectiveTokens)
                 {
                     // tokenize string: get found directive and following instructions
-                    vector<string> lineTokens;
+                    std::vector<std::string> lineTokens;
                     tokenizeStr(line, lineTokens);
 
                     // execute directive instructions
@@ -57,12 +57,12 @@ void page::copyFile(const string &name)
     inFile.close();
 };
 
-void page::tokenizeStr(const string &str, vector<string> &tokens)
+void page::tokenizeStr(const std::string &str, std::vector<std::string> &tokens)
 {
     int beg, end; // beginning and end of substr.
     beg = end = 1; // beg. is 1 to ignore delimeter
 
-    while(end != -1) // until out of range (like string::npos)
+    while(end != -1) // until out of range (like std::string::npos)
     {
         end = str.find(' ',beg);
         tokens.push_back(str.substr(beg, end - beg));
@@ -77,7 +77,7 @@ void page::appendLines(page &p)
         lines.push_back(p.getLine(i));
 }
 
-void page::stripQuotes(string &str)
+void page::stripQuotes(std::string &str)
 {
     // quotation at front
     if(str.front() == '"')
