@@ -75,8 +75,8 @@ void page::tokenizeStr(const std::string &str, std::vector<std::string> &tokens)
 // append lines from another page obj.
 void page::appendLines(page &p)
 {
-    for(int i = 0; i < p.getLineCount(); i++)
-        lines.push_back(p.getLine(i));
+    for(int i = 0; i < p.getLines().size(); i++)
+        lines.push_back(p.getLines()[i]);
 }
 
 void page::stripQuotes(std::string &str)

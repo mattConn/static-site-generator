@@ -28,10 +28,6 @@ public:
     // fileName methods
     std::string getFileName(){return fileName;};
 
-    // get a line by index or last line
-    std::string getLine(){return lines.back();};
-    std::string getLine(const int &lineIndex){return lines[lineIndex];};
-
-    // get line count
-    int getLineCount(){return lines.size();};
+    // get lines
+    std::vector<std::string> getLines(){return lines;};
 };

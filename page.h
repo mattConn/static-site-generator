@@ -32,7 +32,7 @@ public:
         copyFile(name);
     };
 
-    // copy file to lines std::vector
+    // copy file to lines vector
     void copyFile(const std::string &name);
 
     // directive list methods

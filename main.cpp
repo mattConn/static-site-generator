@@ -16,11 +16,16 @@ int main(int argc, char *argv[])
 	// list of pages
 	std::vector<page*> pageList;
 
-	// handle files listed in argv
+	// store files listed in argv
 	for(int i = 1; i < argc; i++)
 	{
-		
+		pageList.push_back(new page(argv[i]));
 	}
+
+	// print content of pages
+	for(auto p : pageList)
+		for(auto l: p->getLines())
+			std::cout << l << std::endl;
 
     return 0;
 }
