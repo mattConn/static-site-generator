@@ -5,7 +5,9 @@ bool page::copyFile(const std::string &name)
     std::string line; // buffer for lines of file
     fileName = name;
 
-	if(!openFile(name)) return false;
+	std::fstream inFile;
+
+	if(!openFile(inFile, name)) return false;
 
     // parse file lines
     while(getline(inFile, line))

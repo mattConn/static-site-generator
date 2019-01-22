@@ -12,15 +12,15 @@
 class fileText
 {
 protected:
-    std::fstream inFile;
     std::string fileName;
     std::vector<std::string> lines;
 
 public:
     fileText(){}; // default
+    fileText(const fileText &f){*this = f;}; // copy constructor
     fileText(const std::string &name){copyFile(name);}; // construct with name of file
 
-	bool openFile(const std::string &name);
+	bool openFile(std::fstream &inFile, const std::string &name);
 
     // copy file to lines std::vector
     bool copyFile(const std::string &name);

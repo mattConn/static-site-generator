@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include <stdexcept>
 #include <string>
 #include <vector>
 #include "fileText.h"
@@ -11,7 +10,7 @@
 
 // ** note: constructors defined inline
 
-bool fileText::openFile(const std::string &name)
+bool fileText::openFile(std::fstream &inFile, const std::string &name)
 {
 	inFile.open(name);
 
@@ -28,9 +27,11 @@ bool fileText::openFile(const std::string &name)
 bool fileText::copyFile(const std::string &name)
 {
     std::string line; // buffer for lines of file
-    fileName = name;
+    fileName = name; // store file's name
 
-	if(!openFile(fileName)) return false;
+	std::fstream inFile; // file stream
+
+	if(!openFile(inFile, fileName)) return false;
 
 	// store file lines
     while(getline(inFile, line)) lines.push_back(line);

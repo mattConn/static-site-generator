@@ -2,8 +2,6 @@
 #include <vector>
 #include "page.h"
 
-using namespace std;
-
 int main(int argc, char *argv[])
 {
 	// check if missing file name cli arg
