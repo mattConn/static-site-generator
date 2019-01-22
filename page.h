@@ -4,13 +4,11 @@
 
 class page : public fileText
 {
-    std::fstream inFile;
-
     // directive definitions
     char delimeter = '#';
     std::vector<std::string> directiveTokens; // directive token, i.e. "include"
 
-    // tokenize std::string helper method
+    // tokenize string helper method
     void tokenizeStr(const std::string &str, std::vector<std::string> &tokens);
 
     // remove quotation marks
@@ -33,7 +31,7 @@ public:
     };
 
     // copy file to lines vector
-    void copyFile(const std::string &name);
+    bool copyFile(const std::string &name);
 
     // directive list methods
     char getDelimeter(){return delimeter;}

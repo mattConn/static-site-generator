@@ -1,13 +1,11 @@
 #include "page.h"
 
-void page::copyFile(const std::string &name)
+bool page::copyFile(const std::string &name)
 {
     std::string line; // buffer for lines of file
     fileName = name;
-    inFile.open(fileName);
-	if(!inFile)
-	{
-	}
+
+	if(!openFile(name)) return false;
 
     // parse file lines
     while(getline(inFile, line))
@@ -20,7 +18,7 @@ void page::copyFile(const std::string &name)
 
         if(line[0] == delimeter) // if starts with delim., may be directive
         {
-            // checking std::string starting at 1 (ignore delimeter)
+            // checking string starting at 1 (ignore delimeter)
             std::string possibleDirectiveTokens = line.substr(1, line.find(' ')-1);
 
             // compare with possible directives in directiveTokens
@@ -57,6 +55,8 @@ void page::copyFile(const std::string &name)
     }
 
     inFile.close();
+
+	return true;
 };
 
 void page::tokenizeStr(const std::string &str, std::vector<std::string> &tokens)

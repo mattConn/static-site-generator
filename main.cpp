@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
 	// check if missing file name cli arg
     if(argc < 2)
 	{
-		std::cout << "Missing file name argument" << std::endl;
+		std::cout << "** ERROR: Missing file name argument **" << std::endl;
 		return 1;
 	}
 
@@ -26,6 +26,10 @@ int main(int argc, char *argv[])
 	for(auto p : pageList)
 		for(auto l: p->getLines())
 			std::cout << l << std::endl;
+
+	// deallocate memory for pageList
+	for(auto p : pageList)
+		delete p;
 
     return 0;
 }
