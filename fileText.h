@@ -30,4 +30,12 @@ public:
 
     // get lines
     std::vector<std::string> getLines(){return lines;};
+
+	// print lines
+	void printLines(){ for(auto l : lines) std::cout << l << std::endl;};
+
+	// overloaded operators
+	//=====================
+	// +=
+	fileText &operator+=(const fileText &rhs);
 };

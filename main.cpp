@@ -17,19 +17,15 @@ int main(int argc, char *argv[])
 	std::vector<page*> pageList;
 
 	// store files listed in argv
-	for(int i = 1; i < argc; i++)
+	for(int i = 1; i < argc; i++) pageList.push_back(new page(argv[i]));
+
+	// print content of pages, then deallocate memory
+	for(auto p : pageList)
 	{
-		pageList.push_back(new page(argv[i]));
-	}
-
-	// print content of pages
-	for(auto p : pageList)
-		for(auto l: p->getLines())
-			std::cout << l << std::endl;
-
-	// deallocate memory for pageList
-	for(auto p : pageList)
+		p->printLines();
 		delete p;
+		p = nullptr;
+	}
 
     return 0;
 }

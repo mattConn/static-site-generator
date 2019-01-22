@@ -9,6 +9,8 @@
 // for capturing file text
 //========================
 
+// ** note: constructors defined inline
+
 bool fileText::openFile(const std::string &name)
 {
 	inFile.open(name);
@@ -37,3 +39,13 @@ bool fileText::copyFile(const std::string &name)
 
 	return true;
 }
+
+// overloaded +=
+fileText &fileText::operator+=(const fileText &rhs)
+{
+	for(auto l : rhs.lines)
+		lines.push_back(l);
+
+	return *this;
+}
+
