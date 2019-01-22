@@ -3,8 +3,8 @@ FLAGS = -std=c++11
 BIN = bin/static-site-generator
 BINCHECK = if [ ! -d bin ]; then mkdir bin; fi;
 
-$(BIN) : main.cpp fileText.h page.h
-	$(BINCHECK) $(COMPILER) $(FLAGS) main.cpp -o $(BIN)
+$(BIN) : main.cpp fileText.cpp page.cpp
+	$(BINCHECK) $(COMPILER) $(FLAGS) $^ -o $@
 
 # tests
 #======
