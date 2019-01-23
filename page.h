@@ -5,7 +5,7 @@
 class page : public fileText
 {
     // directive definitions
-    char delimeter = '#';
+    const char delimeter = '#'; // delimeters, i.e. "#"
     std::vector<std::string> directiveTokens; // directive token, i.e. "include"
 
     // tokenize string helper method
@@ -15,7 +15,7 @@ class page : public fileText
     void stripQuotes(std::string &str);
 
 public:
-    page(){directiveTokens.push_back("include");}; //default
+    page(){directiveTokens.push_back("include");}; // default constructor
 
     page(const std::string &name) // construct with name of file
     {
@@ -23,22 +23,16 @@ public:
         copyFile(name);
     };
 
-    // construct with name of file and delimeter and include dir.
-    page(const std::string &name, const char &delim, const std::string &dir) : delimeter(delim)
+	// construct with name of file and directive tokens
+    page(const std::string &name, const std::initializer_list<std::string> dirTokens) 
     {
-        directiveTokens.push_back(dir);
+		for(auto d : dirTokens)
+        	directiveTokens.push_back(d);
+
         copyFile(name);
     };
 
-    // copy file to lines vector
-    bool copyFile(const std::string &name);
-
     // directive list methods
-    char getDelimeter(){return delimeter;}
-    std::string getdirectiveTokens(){return directiveTokens.back();} // get last directiveTokens
-    std::string getdirectiveTokens(const int &index){return directiveTokens[index];} // get directive label by index
-    int getdirectiveTokensLength(){return directiveTokens.size();}; // num of directiveTokenss used
-
-    // append lines from another page obj.
-    void appendLines(page &p);
+    char getDelimeter(){ return delimeter; }
+    std::vector<std::string> getDirectiveTokens(){ return directiveTokens; } // get directiveTokens
 };
