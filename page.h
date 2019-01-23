@@ -9,10 +9,13 @@ class page : public fileText
     std::vector<std::string> directiveTokens; // directive token, i.e. "include"
 
     // tokenize string helper method
-    void tokenizeStr(const std::string &str, std::vector<std::string> &tokens);
+	std::vector<std::string> tokenizeStr(const std::string &str); 
 
     // remove quotation marks
     void stripQuotes(std::string &str);
+
+	// handle directives (i.e. include file on #include)
+	void handleDirectives(); 
 
 public:
     page(){directiveTokens.push_back("include");}; // default constructor
@@ -32,7 +35,6 @@ public:
         copyFile(name);
     };
 
-    // directive list methods
-    char getDelimeter(){ return delimeter; }
+    char getDelimeter(){ return delimeter; } // get delimeter
     std::vector<std::string> getDirectiveTokens(){ return directiveTokens; } // get directiveTokens
 };

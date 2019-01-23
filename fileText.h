@@ -17,7 +17,7 @@ protected:
 
 public:
     fileText(){}; // default
-    fileText(const fileText &f){*this = f;}; // copy constructor: uses default assignment
+    fileText(const fileText &other){*this = other;}; // copy constructor: uses default assignment
     fileText(const std::string &name){copyFile(name);}; // construct with name of file
 
 	bool openFile(std::fstream &inFile, const std::string &name);

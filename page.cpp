@@ -1,7 +1,9 @@
 #include "page.h"
 
-void page::tokenizeStr(const std::string &str, std::vector<std::string> &tokens)
+std::vector<std::string> page::tokenizeStr(const std::string &str)
 {
+	std::vector<std::string> tokens; // store tokens
+
     int beg, end; // beginning and end of substr.
     beg = end = 1; // beg. is 1 to ignore delimeter
 
@@ -11,6 +13,8 @@ void page::tokenizeStr(const std::string &str, std::vector<std::string> &tokens)
         tokens.push_back(str.substr(beg, end - beg));
         beg = end+1;
     }
+
+	return tokens;
 }
 
 void page::stripQuotes(std::string &str)
