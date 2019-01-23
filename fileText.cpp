@@ -26,6 +26,8 @@ bool fileText::openFile(std::fstream &inFile, const std::string &name)
 // copy file text to lines vector
 bool fileText::copyFile(const std::string &name)
 {
+	if(!lines.empty()) lines.clear(); // clear lines vector (to prevent appending lines)
+
     std::string line; // buffer for lines of file
     fileName = name; // store file's name
 

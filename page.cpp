@@ -26,3 +26,19 @@ void page::stripQuotes(std::string &str)
     if(str.back() == '"')
         str.pop_back();
 }
+
+void page::handleDirectives()
+{
+	// iterate over lines to find directive
+	for(auto l : lines)
+	{
+		for(auto t : directiveTokens) // iterate over directive tokens
+		{
+			if( l.find( delimeter + t ) != -1 ) // if directive found
+			{
+				if(t == "include") std::cout << l << std::endl;
+			}
+		}
+	}
+	
+}

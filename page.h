@@ -14,10 +14,9 @@ class page : public fileText
     // remove quotation marks
     void stripQuotes(std::string &str);
 
-	// handle directives (i.e. include file on #include)
-	void handleDirectives(); 
-
 public:
+
+
     page(){directiveTokens.push_back("include");}; // default constructor
 
     page(const std::string &name) // construct with name of file
@@ -34,6 +33,9 @@ public:
 
         copyFile(name);
     };
+
+	// handle directives (i.e. include file on #include)
+	void handleDirectives(); 
 
     char getDelimeter(){ return delimeter; } // get delimeter
     std::vector<std::string> getDirectiveTokens(){ return directiveTokens; } // get directiveTokens
