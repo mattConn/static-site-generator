@@ -54,7 +54,10 @@ void page::handleDirectives(const std::string &line)
 	{
 		if( line.find( delimeter + t ) != -1 ) // if directive found
 		{
-			if(t == "include") lines.push_back(">"+line);
+			if(t == "include") // include directive
+			{
+				*this += page( tokenizeStr(line)[1] ); // append new file's lines
+			}
 		}
 		else
 			lines.push_back(line); // no directive, store line

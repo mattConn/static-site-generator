@@ -5,8 +5,7 @@ directory creation
 #include foo
 directory lister
 #  include
-
-		#include foo
+		#include test2.txt
 markdown parser
 manifest reader X
 unix chdir to cwd
