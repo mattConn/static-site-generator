@@ -27,18 +27,37 @@ void page::stripQuotes(std::string &str)
         str.pop_back();
 }
 
-void page::handleDirectives()
+// copy file text to lines vector
+bool page::copyFile(const std::string &name)
+{
+    if(!lines.empty()) lines.clear(); // clear lines vector (to prevent appending lines)
+
+    std::string line; // buffer for lines of file
+    fileName = name; // store file's name
+
+    std::fstream inFile; // file stream
+
+    if(!openFile(inFile, fileName)) return false;
+
+    // store file lines
+    while(getline(inFile, line)) handleDirectives(line);
+
+    inFile.close();
+
+    return true;
+}
+
+void page::handleDirectives(const std::string &line)
 {
 	// iterate over lines to find directive
-	for(auto l : lines)
+	for(auto t : directiveTokens) // iterate over directive tokens
 	{
-		for(auto t : directiveTokens) // iterate over directive tokens
+		if( line.find( delimeter + t ) != -1 ) // if directive found
 		{
-			if( l.find( delimeter + t ) != -1 ) // if directive found
-			{
-				if(t == "include") std::cout << l << std::endl;
-			}
+			if(t == "include") lines.push_back(">"+line);
 		}
+		else
+			lines.push_back(line); // no directive, store line
 	}
 	
 }

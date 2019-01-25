@@ -1,0 +1,12 @@
+file includer X
+file scanner X
+argument handler (set delimiter, dist folder)
+directory creation
+#include foo
+directory lister
+#  include
+
+		#include foo
+markdown parser
+manifest reader X
+unix chdir to cwd

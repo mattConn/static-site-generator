@@ -6,7 +6,7 @@ class page : public fileText
 {
     // directive definitions
     const char delimeter = '#'; // delimeters, i.e. "#"
-    std::vector<std::string> directiveTokens; // directive token, i.e. "include"
+    std::vector<std::string> directiveTokens = {"include"}; // directive token, i.e. "include"
 
     // tokenize string helper method
 	std::vector<std::string> tokenizeStr(const std::string &str); 
@@ -21,21 +21,14 @@ public:
 
     page(const std::string &name) // construct with name of file
     {
-        directiveTokens.push_back("include");
         copyFile(name);
     };
 
-	// construct with name of file and directive tokens
-    page(const std::string &name, const std::initializer_list<std::string> dirTokens) 
-    {
-		for(auto d : dirTokens)
-        	directiveTokens.push_back(d);
-
-        copyFile(name);
-    };
+    // copy file to lines std::vector
+    bool copyFile(const std::string &name);
 
 	// handle directives (i.e. include file on #include)
-	void handleDirectives(); 
+	void handleDirectives(const std::string &line); 
 
     char getDelimeter(){ return delimeter; } // get delimeter
     std::vector<std::string> getDirectiveTokens(){ return directiveTokens; } // get directiveTokens
