@@ -6,3 +6,5 @@ directory lister
 markdown parser
 manifest reader X
 unix chdir to cwd
+directory changing (to dir of included file (absPath))
+get cwd
