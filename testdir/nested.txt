@@ -1,0 +1,2 @@
+This is the nested file
+Last line of nested file
