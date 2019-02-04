@@ -4,8 +4,6 @@
 
 class page : public fileText
 {
-	// directory of program execution
-	static std::string baseDir;
 
 	// current directory
 	std::string currentDir;
@@ -24,6 +22,8 @@ class page : public fileText
 	std::string getWorkingDir();
 
 public:
+	// directory of program execution
+	std::string baseDir;
 
 	// default constructor
     page();

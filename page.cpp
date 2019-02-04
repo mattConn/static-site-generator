@@ -2,15 +2,10 @@
 #include <unistd.h>
 
 // default constructor
-page::page()
-{};  
+page::page(){ baseDir = getWorkingDir(); };
 
 // construct with name of file
-page::page(const std::string &name)
-{
-	copyFile(name);
-};
-
+page::page(const std::string &name) : page() { copyFile(name); };
 
 // unistd get current directory
 std::string page::getWorkingDir()
