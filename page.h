@@ -4,6 +4,12 @@
 
 class page : public fileText
 {
+	// directory of program execution
+	static std::string baseDir;
+
+	// current directory
+	std::string currentDir;
+
     // directive definitions
     const char delimeter = '#'; // delimeters, i.e. "#"
     std::vector<std::string> directiveTokens = {"include"}; // directive token, i.e. "include"
@@ -14,15 +20,16 @@ class page : public fileText
     // remove quotation marks
     void stripQuotes(std::string &str);
 
+	// unistd get current working directory
+	std::string getWorkingDir();
+
 public:
 
+	// default constructor
+    page();
 
-    page(){directiveTokens.push_back("include");}; // default constructor
-
-    page(const std::string &name) // construct with name of file
-    {
-        copyFile(name);
-    };
+	// construct with name of file
+    page(const std::string &name);
 
     // copy file to lines std::vector
     bool copyFile(const std::string &name);

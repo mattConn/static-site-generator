@@ -1,4 +1,24 @@
 #include "page.h"
+#include <unistd.h>
+
+// default constructor
+page::page()
+{};  
+
+// construct with name of file
+page::page(const std::string &name)
+{
+	copyFile(name);
+};
+
+
+// unistd get current directory
+std::string page::getWorkingDir()
+{
+   char temp[260];
+   return ( getcwd(temp, sizeof(temp)) ? std::string( temp ) : std::string("") );
+}
+
 
 std::vector<std::string> page::tokenizeStr(const std::string &str)
 {
