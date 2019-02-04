@@ -14,6 +14,21 @@ std::string page::getWorkingDir()
    return ( getcwd(temp, sizeof(temp)) ? std::string( temp ) : std::string("") );
 }
 
+// get location of slash / location from back
+int page::pathSlashLoc(const std::string &fullPath){ return fullPath.rfind("/"); }
+
+// separate file name from file path
+std::string * page::splitPath(const std::string &fullPath)
+{
+	int slashLoc = pathSlashLoc(fullPath);
+
+	std::string path[2];
+
+	path[0] = fullPath.substr(0, slashLoc);
+	path[1] = fullPath.substr(slashLoc+1, fullPath.length()-1);
+
+	return ( slashLoc < 0 ? nullptr : path);
+}
 
 std::vector<std::string> page::tokenizeStr(const std::string &str)
 {

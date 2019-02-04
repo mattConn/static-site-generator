@@ -4,6 +4,8 @@
 
 class page : public fileText
 {
+	// directory of program execution
+	std::string baseDir;
 
 	// current directory
 	std::string currentDir;
@@ -18,12 +20,17 @@ class page : public fileText
     // remove quotation marks
     void stripQuotes(std::string &str);
 
+	// get location of slash / location from back
+	int pathSlashLoc(const std::string &fullPath);
+
+	// separate file name from file path
+	std::string * splitPath(const std::string &fullPath);
+
 	// unistd get current working directory
 	std::string getWorkingDir();
 
+
 public:
-	// directory of program execution
-	std::string baseDir;
 
 	// default constructor
     page();
