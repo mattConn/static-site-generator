@@ -1,4 +1,0 @@
-begin main.txt
-#include "include1.txt"
-#include include2.txt
-end main.txt

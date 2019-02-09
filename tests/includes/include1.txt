@@ -1,3 +1,0 @@
-begin include1.txt
-#include "nested.txt"
-end include1.txt

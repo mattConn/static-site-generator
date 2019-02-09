@@ -1,3 +1,0 @@
-this is a test.
-This file contains words.
-These words should print properly.

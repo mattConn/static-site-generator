@@ -1,2 +1,0 @@
-begin include2.txt
-end include2.txt
