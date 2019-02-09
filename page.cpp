@@ -7,10 +7,10 @@ page::page(){ currentDir = getWorkingDir(); };
 // construct with name of file
 page::page(const std::string &name) : page()
 { 
-	if(getFileName(name).length() > 0)
-		copyFile(currentDir + '/' + getFileName(name));
-	else
-		copyFile(getFileName(name));
+	copyFile(name);
+
+	// change back to base dir after file copy
+	changeDir(baseDir);
 };
 
 // separate file name from file path

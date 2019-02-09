@@ -16,7 +16,7 @@ bool fileText::openFile(std::fstream &inFile, const std::string &name)
 
 	if(!inFile)
 	{
-		std::cout << "** WARNING: could not open file " << name << " **" << std::endl;
+		std::cerr << "** WARNING: could not open file " << name << " **" << std::endl;
 		return false;
 	}
 

@@ -1,17 +1,14 @@
 # static-site-generator
 Another static site generator.
 
-## Usage
-`static-site-generator filepath` will write result to stdout.
+This program currently only stitches together files.
 
-To include files, use the typical C/C++ include directive `#include filepath`.
+## Usage
+`static-site-generator /path/to/file` will write result to stdout.
+
+To include files in one another, use the typical C/C++ include directive `#include some/file.txt` in a file.
 
 ## Building
 Run `make`. Currently compiling with `clang++` and C++11 standards. The binary will be in `bin`.
 
-Compiled successfully on Mac OS and Debian Linux. I haven't tried it on Windows yet.
-
-## This program is partially complete
-This program will successfully include files in the your current working directory or in one directory above.
-
-If a file a directory above tries to include something with a relative path, the program will fail to include it and write this error to stdout.
+Compiled successfully on Mac OS and Debian Linux.

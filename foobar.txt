@@ -1,0 +1,19 @@
+file includer X
+file scanner X
+argument handler (set delimiter, dist folder)
+directory creation
+directory lister
+#  include
+this is test2 txt
+final line of test2
+This is the nested file
+Last line of nested file
+this is test2 txt
+final line of test2
+This is the nested file
+Last line of nested file
+Here is line 1 of test1.txt
+and the final line
+markdown parser
+manifest reader X
+unix chdir to cwd
