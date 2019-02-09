@@ -2,13 +2,15 @@
 #include <unistd.h>
 
 // default constructor
-page::page(){ currentDir = baseDir = getWorkingDir(); };
+page::page(){ currentDir = getWorkingDir(); };
 
 // construct with name of file
 page::page(const std::string &name) : page()
 { 
-	currentDir += ('/' + getFileDir(name));
-	copyFile(currentDir + '/' + getFileName(name));
+	if(getFileName(name).length() > 0)
+		copyFile(currentDir + '/' + getFileName(name));
+	else
+		copyFile(getFileName(name));
 };
 
 // unistd get current directory
@@ -99,9 +101,11 @@ void page::handleDirectives(const std::string &line)
 			std::string filePath = tokenizeStr(line)[1];
 			stripQuotes(filePath);
 
+			changeDir(getFileDir(filePath));	
+
 			if(token == "include") // include directive
 			{
-				*this += page(filePath); // append new file's lines
+				*this += page(getFileName(filePath)); // append new file's lines
 			}
 		}
 		else

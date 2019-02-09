@@ -7,7 +7,7 @@
 class page : public fileText
 {
 	// directory of program execution
-	std::string baseDir;
+	static std::string baseDir;
 
 	// current directory
 	std::string currentDir;
@@ -41,6 +41,12 @@ public:
 
 	// construct with name of file
     page(const std::string &name);
+
+	// construct with name of file and current dir
+    page(const std::string &name, const std::string &curDir);
+
+	// custom destructor
+	~page(){ changeDir(baseDir); };
 
     // copy file to lines std::vector
     bool copyFile(const std::string &name);
