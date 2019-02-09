@@ -2,6 +2,8 @@
 
 #include "fileText.h"
 
+
+
 class page : public fileText
 {
 	// directory of program execution
@@ -20,15 +22,17 @@ class page : public fileText
     // remove quotation marks
     void stripQuotes(std::string &str);
 
-	// get location of slash / location from back
-	int pathSlashLoc(const std::string &fullPath);
+	// separate file dir from file path
+	std::string getFileDir(const std::string &fullPath);
 
 	// separate file name from file path
-	std::string * splitPath(const std::string &fullPath);
+	std::string getFileName(const std::string &fullPath);
 
 	// unistd get current working directory
 	std::string getWorkingDir();
 
+	// unistd chdir wrapper function
+	bool changeDir(const std::string &path);
 
 public:
 

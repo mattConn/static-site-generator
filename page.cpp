@@ -2,32 +2,46 @@
 #include <unistd.h>
 
 // default constructor
-page::page(){ baseDir = getWorkingDir(); };
+page::page(){ currentDir = baseDir = getWorkingDir(); };
 
 // construct with name of file
-page::page(const std::string &name) : page() { copyFile(name); };
+page::page(const std::string &name) : page()
+{ 
+	currentDir += ('/' + getFileDir(name));
+	copyFile(currentDir + '/' + getFileName(name));
+};
 
 // unistd get current directory
 std::string page::getWorkingDir()
 {
-   char temp[260];
-   return ( getcwd(temp, sizeof(temp)) ? std::string( temp ) : std::string("") );
+   char tmp[260];
+   return ( getcwd(tmp, sizeof(tmp)) ? std::string( tmp ) : std::string("") );
 }
 
-// get location of slash / location from back
-int page::pathSlashLoc(const std::string &fullPath){ return fullPath.rfind("/"); }
-
 // separate file name from file path
-std::string * page::splitPath(const std::string &fullPath)
+std::string page::getFileDir(const std::string &fullPath)
 {
-	int slashLoc = pathSlashLoc(fullPath);
+	int slashLoc = fullPath.rfind("/");
 
-	std::string path[2];
+	return ( slashLoc < 0 ? "" : fullPath.substr(0, slashLoc) );
+}
 
-	path[0] = fullPath.substr(0, slashLoc);
-	path[1] = fullPath.substr(slashLoc+1, fullPath.length()-1);
+std::string page::getFileName(const std::string &fullPath)
+{
+	int slashLoc = fullPath.rfind("/");
 
-	return ( slashLoc < 0 ? nullptr : path);
+	return ( slashLoc < 0 ? fullPath : fullPath.substr(slashLoc+1, fullPath.length() - slashLoc+1) );
+}
+
+// unistd chdir wrapper function
+bool page::changeDir(const std::string &path)
+{
+	if( chdir(path.c_str()) < 0 ) // failure
+		return false;
+	else
+		currentDir = path; // success; update current dir
+
+	return true;
 }
 
 std::vector<std::string> page::tokenizeStr(const std::string &str)
@@ -50,11 +64,9 @@ std::vector<std::string> page::tokenizeStr(const std::string &str)
 void page::stripQuotes(std::string &str)
 {
     // quotation at front
-    if(str.front() == '"')
-        str.erase(0,1);
+    if(str.front() == '"') str.erase(0,1);
     // quotation at back
-    if(str.back() == '"')
-        str.pop_back();
+    if(str.back() == '"') str.pop_back();
 }
 
 // copy file text to lines vector
@@ -67,7 +79,7 @@ bool page::copyFile(const std::string &name)
 
     std::fstream inFile; // file stream
 
-    if(!openFile(inFile, fileName)) return false;
+    if(!openFile(inFile, name)) return false;
 
     // store file lines
     while(getline(inFile, line)) handleDirectives(line);
@@ -80,14 +92,14 @@ bool page::copyFile(const std::string &name)
 void page::handleDirectives(const std::string &line)
 {
 	// iterate over lines to find directive
-	for(auto t : directiveTokens) // iterate over directive tokens
+	for(auto token : directiveTokens) // iterate over directive tokens
 	{
-		if( line.find( delimeter + t ) != -1 ) // if directive found
+		if( line.find( delimeter + token ) != -1 ) // if directive found
 		{
 			std::string filePath = tokenizeStr(line)[1];
 			stripQuotes(filePath);
 
-			if(t == "include") // include directive
+			if(token == "include") // include directive
 			{
 				*this += page(filePath); // append new file's lines
 			}

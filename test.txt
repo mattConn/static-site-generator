@@ -6,6 +6,8 @@ directory creation
 directory lister
 #  include
 		#include testdir/test2.txt
+		#include testdir/test2.txt
+		#include test1.txt
 markdown parser
 manifest reader X
 unix chdir to cwd
