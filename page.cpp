@@ -13,13 +13,6 @@ page::page(const std::string &name) : page()
 		copyFile(getFileName(name));
 };
 
-// unistd get current directory
-std::string page::getWorkingDir()
-{
-   char tmp[260];
-   return ( getcwd(tmp, sizeof(tmp)) ? std::string( tmp ) : std::string("") );
-}
-
 // separate file name from file path
 std::string page::getFileDir(const std::string &fullPath)
 {

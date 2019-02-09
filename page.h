@@ -1,14 +1,11 @@
 #pragma once
 
+#include "global.h"
 #include "fileText.h"
-
 
 
 class page : public fileText
 {
-	// directory of program execution
-	static std::string baseDir;
-
 	// current directory
 	std::string currentDir;
 
@@ -27,9 +24,6 @@ class page : public fileText
 
 	// separate file name from file path
 	std::string getFileName(const std::string &fullPath);
-
-	// unistd get current working directory
-	std::string getWorkingDir();
 
 	// unistd chdir wrapper function
 	bool changeDir(const std::string &path);

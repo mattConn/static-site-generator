@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include "global.h"
 #include "page.h"
 
 int main(int argc, char *argv[])
